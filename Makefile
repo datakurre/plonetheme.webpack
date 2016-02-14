@@ -10,7 +10,7 @@ all: build
 show:
 	@echo $(SOURCES)
 
-build: clean lib bin/instance $(WEBPACK) $(SOURCES)
+build: clean lib $(WEBPACK) $(SOURCES)
 	mkdir -p build/theme
 	cp -R theme build/theme/webpack
 	$(WEBPACK)
@@ -38,6 +38,9 @@ bin/buildout: bootstrap-buildout.py buildout.cfg
 
 bin/instance: $(BUILDOUT_BIN) buildout.cfg
 	$(BUILDOUT_BIN) -N install instance
+
+bin/test: $(BUILDOUT_BIN) buildout.cfg
+	$(BUILDOUT_BIN) -N install test
 
 $(WEBPACK): node_modules
 $(WEBPACK_DEV_SERVER): node_modules

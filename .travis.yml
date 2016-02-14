@@ -1,0 +1,15 @@
+language: node_js
+node_js: 4.1
+sudo: false
+cache:
+  directories:
+  - eggs
+  - node_modules
+before_install:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+install:
+- npm i
+script:
+- PLONE_SITE_ID=plone make build bin/test
+- bin/test --test-path=src -t test_portlets -t test_tinymce
