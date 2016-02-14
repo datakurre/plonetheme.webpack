@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+.installed.cfg
+bootstrap-buildout.py
+build/
+node_modules/
+bin/
+parts/
+var/

@@ -1,0 +1,27 @@
+[submodule "lib/Products.CMFPlone"]
+	path = lib/Products.CMFPlone
+	url = https://github.com/plone/Products.CMFPlone
+[submodule "lib/plone.app.portlets"]
+	path = lib/plone.app.portlets
+	url = https://github.com/plone/plone.app.portlets
+[submodule "lib/mockup"]
+	path = lib/mockup
+	url = https://github.com/plone/mockup
+[submodule "lib/patternslib"]
+	path = lib/patternslib
+	url = https://github.com/Patternslib/Patterns
+[submodule "lib/logging"]
+	path = lib/logging
+	url = https://github.com/Patternslib/logging
+[submodule "lib/tinymce-builded"]
+	path = lib/tinymce-builded
+	url = https://github.com/artursmirnov/tinymce_builded
+[submodule "lib/jquery.recurrenceinput"]
+	path = lib/jquery.recurrenceinput
+	url = https://github.com/collective/jquery.recurrenceinput.js
+[submodule "lib/plonetheme.barceloneta"]
+	path = lib/plonetheme.barceloneta
+	url = https://github.com/plone/plonetheme.barceloneta
+[submodule "lib/jquery-tmpl"]
+	path = lib/jquery-tmpl
+	url = https://github.com/BorisMoore/jquery-tmpl
