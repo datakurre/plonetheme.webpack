@@ -205,7 +205,8 @@ if(TARGET === 'build' || !TARGET) {
     output: {
       filename: '[name].[chunkhash].js',
       chunkFilename: '[chunkhash].js',
-      publicPath: '/Plone/++theme++webpack/'
+      publicPath: ('/' + (process.env.PLONE_SITE_ID || 'Plone') +
+                   '/++theme++webpack/')
     },
     module: {
       loaders: [
@@ -232,7 +233,7 @@ if(TARGET === 'build' || !TARGET) {
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
       }),
-      new webpack.optimize.CommonsChunkPlugin('init'),
+      new webpack.optimize.CommonsChunkPlugin('init.js'),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
       })

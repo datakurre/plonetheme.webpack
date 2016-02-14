@@ -18,9 +18,9 @@
   <link rel="apple-touch-icon-precomposed"
         href="apple-touch-icon-precomposed.png" />
 -->
-<% for (var css in htmlWebpackPlugin.files.chunks['init'].css) { %>
+<% for (var css in htmlWebpackPlugin.files.chunks['init.js'].css) { %>
   <link rel="stylesheet"
-        href="<%= htmlWebpackPlugin.files.chunks['init'].css[css] %>" />
+        href="<%= htmlWebpackPlugin.files.chunks['init.js'].css[css] %>" />
 <% } %>
 <% for (var css in htmlWebpackPlugin.files.chunks['plone'].css) { %>
   <link rel="stylesheet"
@@ -64,7 +64,7 @@
 <footer id="portal-footer-wrapper" role="contentinfo">
   <div class="container" id="portal-footer"></div>
 </footer>
-<script src="<%= htmlWebpackPlugin.files.chunks['init'].entry %>"></script>
+<script src="<%= htmlWebpackPlugin.files.chunks['init.js'].entry %>"></script>
 <script src="<%= htmlWebpackPlugin.files.chunks['plone'].entry %>"></script>
 </body>
 </html>

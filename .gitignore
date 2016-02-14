@@ -1,6 +1,7 @@
 .idea
 .DS_Store
 .installed.cfg
+*.pyc
 bootstrap-buildout.py
 build/
 node_modules/
