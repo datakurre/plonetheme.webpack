@@ -18,6 +18,7 @@ with Webpack, completely bypassing Plone 5 resource registry.
 
 **Cons:**
 
+* You are on you own. No more JS / CSS updates with new Python package releases.
 * Installing a new Plone add-on requires configuring and building add-on's
   resources into theme.
 
