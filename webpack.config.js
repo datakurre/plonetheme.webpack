@@ -199,7 +199,19 @@ const common = {
       { test: alias['jquery.recurrenceinput'], loader: 'imports?tmpl=jquery.tmpl' },
       { test: /\.(png|gif|otf|eot|svg|ttf|woff|woff2).*$/, loader: 'url?limit=8192' }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(PATHS.theme, 'index.html'),
+      inject: false
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+    })
+  ]
 };
 
 const TARGET = process.env.TARGET || process.env.NODE_ENV;
@@ -218,16 +230,6 @@ if(TARGET === 'build' || !TARGET) {
     },
     plugins: [
       new ExtractTextPlugin('[name].[chunkhash].css'),
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: path.join(PATHS.theme, 'index.html'),
-        inject: false
-      }),
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery'
-      }),
       new webpack.optimize.CommonsChunkPlugin('init.js'),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
@@ -252,10 +254,11 @@ if(TARGET === 'watch') {
         { test: /\.less$/, loaders: ['style', 'css', 'less'] }
       ]
     },
+    entry: path.join(PATHS.src, 'plone-logged-in.js'),
     output: {
       filename: 'bundle.js',
-      publicPath: ('http://' + (process.env.HOST || 'localhost') + ':' +
-      (process.env.PORT || '8080') + '/assets/')
+      publicPath: 'http://' + (process.env.HOST || 'localhost') + ':' +
+                  (process.env.PORT || '8080') + '/assets/'
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin()
