@@ -18,22 +18,14 @@
   <link rel="apple-touch-icon-precomposed"
         href="apple-touch-icon-precomposed.png" />
 -->
-<% for (var css in htmlWebpackPlugin.files.chunks['init.js'].css) { %>
-  <link rel="stylesheet"
-        href="<%= htmlWebpackPlugin.files.chunks['init.js'].css[css] %>" />
-<% } %>
-<% for (var css in htmlWebpackPlugin.files.chunks['plone-logged-in'].css) { %>
-  <link rel="stylesheet"
-        href="<%= htmlWebpackPlugin.files.chunks['plone-logged-in'].css[css] %>" />
-<% } %>
-<% for (var css in htmlWebpackPlugin.files.chunks['resourceregistry'].css) { %>
+  <link rel="stylesheet" data-name="bundle-plone"
+        href="<%= htmlWebpackPlugin.files.chunks['plone'].css[0] %>" />
+  <link rel="stylesheet" data-name="bundle-plone-logged-in"
+        href="<%= htmlWebpackPlugin.files.chunks['plone-logged-in'].css[0] %>" />
   <link rel="stylesheet" data-name="bundle-resourceregistry"
-        href="<%= htmlWebpackPlugin.files.chunks['resourceregistry'].css[css] %>" />
-<% } %>
-<% for (var css in htmlWebpackPlugin.files.chunks['thememapper'].css) { %>
+        href="<%= htmlWebpackPlugin.files.chunks['resourceregistry'].css[0] %>" />
   <link rel="stylesheet" data-name="bundle-thememapper"
-        href="<%= htmlWebpackPlugin.files.chunks['thememapper'].css[css] %>" />
-<% } %>
+        href="<%= htmlWebpackPlugin.files.chunks['thememapper'].css[0] %>" />
 </head>
 <body>
 <section id="portal-toolbar">
@@ -73,10 +65,13 @@
   <div class="container" id="portal-footer"></div>
 </footer>
 <script src="<%= htmlWebpackPlugin.files.chunks['init.js'].entry %>"></script>
-<script src="<%= htmlWebpackPlugin.files.chunks['plone-logged-in'].entry %>"></script>
 <script data-name="bundle-resourceregistry"
         src="<%= htmlWebpackPlugin.files.chunks['resourceregistry'].entry %>"></script>
 <script data-name="bundle-thememapper"
         src="<%= htmlWebpackPlugin.files.chunks['thememapper'].entry %>"></script>
+<script data-name="bundle-plone"
+        src="<%= htmlWebpackPlugin.files.chunks['plone'].entry %>"></script>
+<script data-name="bundle-plone-logged-in"
+        src="<%= htmlWebpackPlugin.files.chunks['plone-logged-in'].entry %>"></script>
 </body>
 </html>

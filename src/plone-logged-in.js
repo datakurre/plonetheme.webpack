@@ -1,5 +1,4 @@
 require('./plone-logged-in.less');
-require('./toolbar.less');
 require('./theme.less');
 
 require('plone/plone');

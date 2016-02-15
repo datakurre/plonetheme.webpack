@@ -11,5 +11,5 @@ before_install:
 install:
 - npm i
 script:
-- PLONE_SITE_ID=plone make build bin/test
+- PUBLIC_PATH=/plone/++theme++webpack/ make build bin/test
 - bin/test --test-path=src -t test_portlets -t test_tinymce

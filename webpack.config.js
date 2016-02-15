@@ -209,8 +209,7 @@ if(TARGET === 'build' || !TARGET) {
     output: {
       filename: '[name].[chunkhash].js',
       chunkFilename: '[chunkhash].js',
-      publicPath: ('/' + (process.env.PLONE_SITE_ID || 'Plone') +
-                   '/++theme++webpack/')
+      publicPath: process.env.PUBLIC_PATH || '/Plone/++theme++webpack/'
     },
     module: {
       loaders: [
@@ -221,12 +220,7 @@ if(TARGET === 'build' || !TARGET) {
       new ExtractTextPlugin('[name].[chunkhash].css'),
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: path.join(PATHS.theme, 'plone.html'),
-        inject: false
-      }),
-      new HtmlWebpackPlugin({
-        filename: 'plone-logged-in.html',
-        template: path.join(PATHS.theme, 'plone-logged-in.html'),
+        template: path.join(PATHS.theme, 'index.html'),
         inject: false
       }),
       new webpack.DefinePlugin({
