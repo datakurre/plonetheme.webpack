@@ -4,9 +4,9 @@
 Plone theme template with webpack built resources
 =================================================
 
-WIP Plone theme example for building all Plone CSS and JavaScript
-resources with webpack, completely independently from Plone 5
-resource registries. Also no bower, grunt or gulp is required.
+WIP Plone theme example for building all Plone CSS and JavaScript resources
+with webpack, completely pybassing Plone 5 resource registries. Also no bower,
+grunt or gulp is required.
 
 Building the included Barceloneta based theme (into ``./build``):
 
@@ -31,3 +31,7 @@ Gotchas
   loaded resources. This defaults to ``/Plone/++theme++webpack/`` and
   can be customized with an enviroment variable as in
   ``PUBLIC_PATH=/site/++theme++mytheme/ make build``.
+
+* Webpack seems to fetch media resources for LESS-files only after bundling
+  them, which required to copy icons for ``jquery.recurrenceinput.js``
+  into ``./src`` with the main style files.
