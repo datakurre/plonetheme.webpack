@@ -13,12 +13,21 @@ Building the included Barceloneta based theme (into ``./build``):
 .. code:: bash
 
    $ git clone https://github.com/datakurre/plonetheme.webpack
-   $ cd plonetheme.webpack
+   $ cd plonetheme.webpack
    $ make
 
 Building a local Plone-site with the theme available:
 
 .. code:: bash
 
-   $ make bin/instance
-   $ bin/instance fg
+   $ make bin/instance
+   $ bin/instance fg
+
+
+Gotchas
+-------
+
+* Webpack requires absolute public path for its asynchronously
+  loaded resources. This defaults to ``/Plone/++theme++webpack/`` and
+  can be customized with an enviroment variable as in
+  ``PUBLIC_PATH=/site/++theme++mytheme/ make build``.

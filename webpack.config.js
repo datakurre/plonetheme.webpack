@@ -209,8 +209,7 @@ if(TARGET === 'build' || !TARGET) {
     output: {
       filename: '[name].[chunkhash].js',
       chunkFilename: '[chunkhash].js',
-      publicPath: ('/' + (process.env.PLONE_SITE_ID || 'Plone') +
-                   '/++theme++webpack/')
+      publicPath: process.env.PUBLIC_PATH || '/Plone/++theme++webpack/'
     },
     module: {
       loaders: [
