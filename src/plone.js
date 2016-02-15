@@ -1,5 +1,4 @@
 require('./plone.less');
-require('./toolbar.less');
 require('./theme.less');
 
 require('plone/plone');

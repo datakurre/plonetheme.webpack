@@ -221,12 +221,7 @@ if(TARGET === 'build' || !TARGET) {
       new ExtractTextPlugin('[name].[chunkhash].css'),
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: path.join(PATHS.theme, 'plone.html'),
-        inject: false
-      }),
-      new HtmlWebpackPlugin({
-        filename: 'plone-logged-in.html',
-        template: path.join(PATHS.theme, 'plone-logged-in.html'),
+        template: path.join(PATHS.theme, 'index.html'),
         inject: false
       }),
       new webpack.DefinePlugin({
