@@ -13,10 +13,12 @@ with Webpack, completely bypassing Plone 5 resource registry.
 * Convenient theme development with Webpack's hot module replacement.
 * Complete control of all the resources and their versions.
 * No RequireJS, no Bower, no Grunt, no RequireJS configurations distributed
-  across the ecosystem.
+  across the ecosystem. All configuration in a single ``./webpack.config.js``.
+* Easy integration for Babel and other recent JS tools with Webpack.
 
 **Cons:**
 
+* You are on your own. No more JS / CSS updates with new Python package releases.
 * Installing a new Plone add-on requires configuring and building add-on's
   resources into theme.
 
@@ -31,35 +33,42 @@ Requirements
 Getting started
 ---------------
 
-Cloning the project:
+Clone the project:
 
 .. code:: bash
 
    $ git clone https://github.com/datakurre/plonetheme.webpack
    $ cd plonetheme.webpack
 
-Building the included Barceloneta based theme (into ``./build``):
+Build the included Barceloneta based theme (into ``./build``):
 
 .. code:: bash
 
    $ make
 
-Building a local Plone-site with the theme available:
+Buildout a local Plone-site with the included theme available
+(by ``./build`` being mapped as filesystem resource directory
+for the site):
 
 .. code:: bash
 
    $ make bin/instance
    $ bin/instance fg
 
-   # Create a Plone site and activate webpack theme
+Open ``http://localhost:8080``, create a new Plone site with
+id ``Plone``, go to theming control panel at the site setup
+and activate the included theme.
 
-Running Webpack dev server (for hot resource replacement):
+Try developing the theme with Webpack development server:
 
 .. code:: bash
 
    $ make watch
 
-   # Open the Plone site created in the previous step
+Open the Plone site at ``http://localhost:8080/Plone``,
+edit the styles for logged in users at
+``./src/plone-logged-in.less`` and see the changes being
+automatically updated.
 
 
 Known issues
