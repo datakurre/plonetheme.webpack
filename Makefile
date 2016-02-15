@@ -15,6 +15,12 @@ build: clean lib $(WEBPACK) $(SOURCES)
 	cp -R theme build/theme/webpack
 	$(WEBPACK)
 
+watch: clean lib $(WEBPACK) $(SOURCES)
+	mkdir -p build/theme
+	cp -R theme build/theme/webpack
+	PORT=8090 TARGET=watch $(WEBPACK)
+	PORT=8090 TARGET=watch $(WEBPACK_DEV_SERVER)
+
 clean:
 	rm -rf build
 
