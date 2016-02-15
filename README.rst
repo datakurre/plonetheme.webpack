@@ -4,16 +4,45 @@
 Plone theme template with Webpack built resources
 =================================================
 
-WIP Plone theme example for building all Plone CSS and JavaScript resources
-with Webpack, completely pybassing Plone 5 resource registries. Also no bower,
-grunt or gulp is required.
+Plone theme template for building all Plone CSS and JavaScript resources
+with Webpack, completely pybassing Plone 5 resource registry.
 
-Building the included Barceloneta based theme (into ``./build``):
+Pros:
+
+* Webpack-optimized chunked resources.
+* Theme development with Webpack's hot module replacement.
+* Complete control of the resource and their versions (=no surprises).
+* Less configuration and build tools (no requirejs, no bower, no grunt,
+  no requirejs path configuration distributed across different packages).
+
+Cons:
+
+* Installing an add-on requires configuring and building add-on's
+  resources into theme.
+
+
+Requirements
+------------
+
+* GNU make
+* NodeJS >= 4 with npm
+* Plone-compatible Python 2.7 environment
+
+
+Getting started
+---------------
+
+Cloning the project:
 
 .. code:: bash
 
    $ git clone https://github.com/datakurre/plonetheme.webpack
    $ cd plonetheme.webpack
+
+Building the included Barceloneta based theme (into ``./build``):
+
+.. code:: bash
+
    $ make
 
 Building a local Plone-site with the theme available:
@@ -30,6 +59,9 @@ Running Webpack dev server (for hot resource replacement):
 .. code:: bash
 
    $ make watch
+
+   # Open the Plone site created in the previous step
+
 
 Gotchas
 -------
