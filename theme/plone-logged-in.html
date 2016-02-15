@@ -26,6 +26,14 @@
   <link rel="stylesheet"
         href="<%= htmlWebpackPlugin.files.chunks['plone-logged-in'].css[css] %>" />
 <% } %>
+<% for (var css in htmlWebpackPlugin.files.chunks['resourceregistry'].css) { %>
+  <link rel="stylesheet" data-name="bundle-resourceregistry"
+        href="<%= htmlWebpackPlugin.files.chunks['resourceregistry'].css[css] %>" />
+<% } %>
+<% for (var css in htmlWebpackPlugin.files.chunks['thememapper'].css) { %>
+  <link rel="stylesheet" data-name="bundle-thememapper"
+        href="<%= htmlWebpackPlugin.files.chunks['thememapper'].css[css] %>" />
+<% } %>
 </head>
 <body>
 <section id="portal-toolbar">
@@ -66,5 +74,9 @@
 </footer>
 <script src="<%= htmlWebpackPlugin.files.chunks['init.js'].entry %>"></script>
 <script src="<%= htmlWebpackPlugin.files.chunks['plone-logged-in'].entry %>"></script>
+<script data-name="bundle-resourceregistry"
+        src="<%= htmlWebpackPlugin.files.chunks['resourceregistry'].entry %>"></script>
+<script data-name="bundle-thememapper"
+        src="<%= htmlWebpackPlugin.files.chunks['thememapper'].entry %>"></script>
 </body>
 </html>

@@ -86,6 +86,7 @@ const alias = {
   'mockup-patterns-relateditems.less': MOCKUP('patterns/relateditems/pattern.relateditems.less'),
   'mockup-patterns-relateditems': MOCKUP('patterns/relateditems/pattern'),
   'mockup-patterns-resourceregistry': MOCKUP('patterns/resourceregistry/pattern'),
+  'mockup-patterns-resourceregistry.less': MOCKUP('patterns/resourceregistry/pattern.resourceregistry.less'),
   'mockup-patterns-resourceregistry-url': MOCKUP('patterns/resourceregistry'),
   'mockup-patterns-select2.less': MOCKUP('patterns/select2/pattern.select2.less'),
   'mockup-patterns-select2': MOCKUP('patterns/select2/pattern'),
@@ -96,6 +97,7 @@ const alias = {
   'mockup-patterns-textareamimetypeselector': MOCKUP('patterns/textareamimetypeselector/pattern'),
   'mockup-patterns-texteditor': MOCKUP('patterns/texteditor/pattern'),
   'mockup-patterns-thememapper': MOCKUP('patterns/thememapper/pattern'),
+  'mockup-patterns-thememapper.less': MOCKUP('patterns/thememapper/pattern.thememapper.less'),
   'mockup-patterns-thememapper-url': MOCKUP('patterns/thememapper'),
   'mockup-patterns-tinymce.less': MOCKUP('patterns/tinymce/less/pattern.tinymce.less'),
   'mockup-patterns-tinymce': MOCKUP('patterns/tinymce/pattern'),
@@ -180,7 +182,9 @@ const alias = {
 const common = {
   entry: {
     'plone': path.join(PATHS.src, 'plone.js'),
-    'plone-logged-in': path.join(PATHS.src, 'plone-logged-in.js')
+    'plone-logged-in': path.join(PATHS.src, 'plone-logged-in.js'),
+    'resourceregistry': path.join(PATHS.src, 'resourceregistry.js'),
+    'thememapper': path.join(PATHS.src, 'thememapper.js')
   },
   resolve: {
     alias: alias
