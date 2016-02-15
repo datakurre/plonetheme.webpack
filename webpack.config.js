@@ -183,8 +183,7 @@ const common = {
   entry: {
     'plone': path.join(PATHS.src, 'plone.js'),
     'plone-logged-in': path.join(PATHS.src, 'plone-logged-in.js'),
-    'resourceregistry': path.join(PATHS.src, 'resourceregistry.js'),
-    'thememapper': path.join(PATHS.src, 'thememapper.js')
+    'resourceregistry': path.join(PATHS.src, 'resourceregistry.js')
   },
   resolve: {
     alias: alias

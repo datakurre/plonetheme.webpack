@@ -22,8 +22,6 @@
   <!-- Drop template specific bundles -->
   <drop css:if-not-content="body.template-resourceregistry-controlpanel"
         theme="//*[@data-name='bundle-resourceregistry']" />
-  <drop css:if-not-content="body.template-theming-controlpanel"
-        theme="//*[@data-name='bundle-thememapper']" />
 
   <rules css:if-content="#visual-portal-wrapper">
     <!-- Placeholder for your own additional rules -->
