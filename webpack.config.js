@@ -223,9 +223,6 @@ if(TARGET === 'build' || !TARGET) {
         template: path.join(PATHS.theme, 'index.html'),
         inject: false
       }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production')
-      }),
       new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
