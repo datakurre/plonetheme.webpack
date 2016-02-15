@@ -5,7 +5,7 @@ Plone theme template with Webpack built resources
 =================================================
 
 Plone theme template for building all Plone CSS and JavaScript resources
-with Webpack, completely pybassing Plone 5 resource registry.
+with Webpack, completely bypassing Plone 5 resource registry.
 
 Pros:
 
