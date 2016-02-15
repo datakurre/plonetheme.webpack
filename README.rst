@@ -17,7 +17,7 @@ Pros:
 
 Cons:
 
-* Installing an add-on requires configuring and building add-on's
+* Installing a new Plone add-on requires configuring and building add-on's
   resources into theme.
 
 
