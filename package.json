@@ -29,7 +29,6 @@
     "jquery-form": "^3.50.0",
     "jquery.browser": "^0.1.0",
     "jquery.cookie": "^1.4.1",
-    "less": "^2.6.0",
     "moment": "^2.11.2",
     "pickadate": "^3.5.6",
     "select2": "^3.5.1",

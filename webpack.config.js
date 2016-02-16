@@ -218,6 +218,21 @@ const common = {
     ]
   },
   plugins: [
+    new webpack.NormalModuleReplacementPlugin(
+      // Fix issues where css-loader left url()s with relative paths
+      new RegExp('^\./[^\.]+\.(png|gif)$'), function(ob) {
+        switch(ob.request) {
+          case './prev.gif':
+          case './next.gif':
+          case './pb_close.png':
+            ob.request = resolve(
+              path.join(JQUERY_RECURRENCE('lib'), ob.request));
+            break;
+          case './jqtree-circle.png':
+            ob.request = 'jqtree/jqtree-circle.png';
+            break;
+        }
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.join(PATHS.theme, 'index.html'),

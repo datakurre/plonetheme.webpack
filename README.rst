@@ -78,7 +78,3 @@ Known issues
   loaded resources. This defaults to ``/Plone/++theme++webpack/`` but
   can be customized with an enviroment variable as in
   ``PUBLIC_PATH=/site/++theme++mytheme/ make build``.
-
-* Webpack seems to fetch media resources for LESS-files only after building
-  LESS into CSS, which required to copy icons for ``jquery.recurrenceinput.js``
-  into ``./src`` next the LESS style files.
