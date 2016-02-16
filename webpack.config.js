@@ -5,40 +5,43 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const PATHS = {
-  src: path.join(__dirname, 'src'),
-  theme: path.join(__dirname, 'theme'),
-  lib: path.join(__dirname, 'lib'),
-  build: path.join(__dirname, 'build', 'theme', 'webpack')
-};
+const resolve = path.resolve;
 
-function paths (base) {
+function resolver(base) {
   return function (sub) {
-    return base ? (
-      sub ? path.join(__dirname, base, sub) : path.join(__dirname, base)
+    return resolve(base ? (
+      sub ? path.join(resolve(base), sub) : resolve(base)
     ) : (
-      sub ? path.join(__dirname, sub) : __dirname
-    );
+      sub ? resolve(sub) : __dirname
+    ));
   };
 }
 
-// Helpers
-const PATH = paths();
-const CMFPLONE = paths('lib/Products.CMFPlone/Products/CMFPlone');
-const JQUERY_RECURRENCE = paths('lib/jquery.recurrenceinput');
-const JQUERY_TMPL = paths('lib/jquery-tmpl');
-const JQUERY_TOOLS = paths('lib/jquerytools/src');
-const LOGGING = paths('lib/logging');
-const MOCKUP = paths('lib/mockup/mockup');
-const PATTERNSLIB = paths('lib/patternslib');
-const TINYMCE = paths('lib/tinymce-builded');
+// Main paths
+const PATHS = {
+  src: resolve('./src'),
+  theme: resolve('./theme'),
+  lib: resolve('./lib'),
+  build: resolve('./build/theme/webpack')
+};
+
+// Helper path resolvers
+const SRC = resolver('./src');
+const CMFPLONE = resolver('./lib/Products.CMFPlone/Products/CMFPlone');
+const JQUERY_RECURRENCE = resolver('./lib/jquery.recurrenceinput');
+const JQUERY_TMPL = resolver('./lib/jquery-tmpl');
+const JQUERY_TOOLS = resolver('./lib/jquerytools/src');
+const LOGGING = resolver('./lib/logging');
+const MOCKUP = resolver('./lib/mockup/mockup');
+const PATTERNSLIB = resolver('./lib/patternslib');
+const TINYMCE = resolver('./lib/tinymce-builded');
 
 const alias = {
-  /* Add-ons */
-  'PloneFormGen': PATH('lib/Products.PloneFormGen/Products/PloneFormGen/browser/resources'),
-  'plonetheme.barceloneta': PATH('lib/plonetheme.barceloneta/plonetheme/barceloneta/theme'),
+  // Add-ons
+  'PloneFormGen': resolve('./lib/Products.PloneFormGen/Products/PloneFormGen/browser/resources'),
+  'plonetheme.barceloneta': resolve('./lib/plonetheme.barceloneta/plonetheme/barceloneta/theme'),
 
-  /* Bower */
+  // Legacy bower aliases
   'bower/bootstrap': 'bootstrap',
   'bowerbootstrap': 'bootstrap',
   'bower/dropzone': 'dropzone',
@@ -48,7 +51,7 @@ const alias = {
   'bower/select2': 'select2',
   'bower/tinymce-builded': TINYMCE(),
 
-  /* Plone */
+  // Plone core-bundles and mockup aliases
   'ace': 'brace',
   'bootstrap-alert': 'bootstrap/js/alert',
   'bootstrap-collapse': 'bootstrap/js/collapse',
@@ -124,13 +127,13 @@ const alias = {
   'picker.time': 'pickadate/lib/picker.time',
   'plone': CMFPLONE('static'),
   'plone-logged-in': CMFPLONE('static/plone-logged-in'),
-  'plone-patterns-portletmanager': PATH('lib/plone.app.portlets/plone/app/portlets/browser/manage-portlets'),
+  'plone-patterns-portletmanager': resolve('./lib/plone.app.portlets/plone/app/portlets/browser/manage-portlets'),
   'plone-patterns-toolbar': CMFPLONE('static/patterns/toolbar/src/toolbar'),
-  'plone-patterns-toolbar.less': PATH('src/toolbar.less'),
+  'plone-patterns-toolbar.less': SRC('toolbar.less'),
   'plone-toolbar': CMFPLONE('static/patterns/toolbar/src'),
   'translate': MOCKUP('js/i18n-wrapper'),
 
-  // TinyMCE
+  // TinyMCE aliases
   'tinymce': TINYMCE('js/tinymce/tinymce'),
   'tinymce-advlist': TINYMCE('js/tinymce/plugins/advlist/plugin'),
   'tinymce-anchor': TINYMCE('js/tinymce/plugins/anchor/plugin'),
@@ -175,7 +178,7 @@ const alias = {
   'tinymce-visualchars': TINYMCE('js/tinymce/plugins/visualchars/plugin'),
   'tinymce-wordcount': TINYMCE('js/tinymce/plugins/wordcount/plugin'),
 
-  // Patternslib
+  // Patternslib aliases
   'pat-base': PATTERNSLIB('src/core/base'),
   'pat-compat': PATTERNSLIB('/src/core/compat'),
   'pat-jquery-ext': PATTERNSLIB('src/core/jquery-ext'),
@@ -185,16 +188,16 @@ const alias = {
   'pat-utils': PATTERNSLIB('src/core/utils'),
   'logging': LOGGING('src/logging'),
 
-  // JQueryTools
+  // JQueryTools aliases
   'jquerytools.tabs': JQUERY_TOOLS('tabs/tabs')
 };
 
 const common = {
   entry: {
-    'plone': path.join(PATHS.src, 'plone.js'),
-    'plone-logged-in': path.join(PATHS.src, 'plone-logged-in.js'),
-    'resourceregistry': path.join(PATHS.src, 'resourceregistry.js'),
-    'ploneformgen': path.join(PATHS.src, 'ploneformgen.js')
+    'plone': SRC('plone.js'),
+    'plone-logged-in': SRC('plone-logged-in.js'),
+    'resourceregistry': SRC('resourceregistry.js'),
+    'ploneformgen': SRC('ploneformgen.js')
   },
   resolve: {
     alias: alias
@@ -204,12 +207,12 @@ const common = {
   },
   module: {
     loaders: [
-      { test: /\.(png|gif|otf|eot|svg|ttf|woff|woff2).*$/, loader: 'url?limit=8192' },
+      { test: /\.(png|gif|otf|eot|svg|ttf|woff|woff2)$/, loader: 'url?limit=8192' },
       { test: alias['tinymce'], loader: 'exports?tinymce' },
       { test: alias['jquery.recurrenceinput'], loader: 'imports?tmpl=jquery.tmpl' },
       { test: alias['jquery.event.drop'], loader: 'exports?$.drop' },
       { test: alias['jquerytools.tabs'], loader: 'exports?$.tabs' },
-      { test: /backbone.paginator/, loader: 'imports?_=underscore' },
+      { test: /backbone\.paginator/, loader: 'imports?_=underscore' },
       { test: /PloneFormGen.*quickedit\.js$/,
         loader: 'imports?requirejs=>define,_tabs=jquerytools.tabs' }
     ]
