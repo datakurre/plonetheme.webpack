@@ -12,23 +12,31 @@ const PATHS = {
   build: path.join(__dirname, 'build', 'theme', 'webpack')
 };
 
-function builder(base) {
-  return function (sub) { return sub ? path.join(__dirname, base, sub) :
-                                       path.join(__dirname, base); };
+function paths (base) {
+  return function (sub) {
+    return base ? (
+      sub ? path.join(__dirname, base, sub) : path.join(__dirname, base)
+    ) : (
+      sub ? path.join(__dirname, sub) : __dirname
+    );
+  };
 }
 
-SRC = builder(path.join('src'));
-BARCELONETA = builder(path.join('lib', 'plonetheme.barceloneta', 'plonetheme', 'barceloneta'));
-CMFPLONE = builder(path.join('lib', 'Products.CMFPlone', 'Products', 'CMFPlone'));
-JQUERY_RECURRENCE = builder(path.join('lib', 'jquery.recurrenceinput'));
-JQUERY_TMPL = builder(path.join('lib', 'jquery-tmpl'));
-LOGGING = builder(path.join('lib', 'logging'));
-MOCKUP = builder(path.join('lib', 'mockup', 'mockup'));
-PATTERNSLIB = builder(path.join('lib', 'patternslib'));
-PORTLETS = builder(path.join('lib', 'plone.app.portlets', 'plone', 'app', 'portlets'));
-TINYMCE = builder(path.join('lib', 'tinymce-builded'));
+// Helpers
+const PATH = paths();
+const CMFPLONE = paths('lib/Products.CMFPlone/Products/CMFPlone');
+const JQUERY_RECURRENCE = paths('lib/jquery.recurrenceinput');
+const JQUERY_TMPL = paths('lib/jquery-tmpl');
+const JQUERY_TOOLS = paths('lib/jquerytools/src');
+const LOGGING = paths('lib/logging');
+const MOCKUP = paths('lib/mockup/mockup');
+const PATTERNSLIB = paths('lib/patternslib');
+const TINYMCE = paths('lib/tinymce-builded');
 
 const alias = {
+  /* Add-ons */
+  'PloneFormGen': PATH('lib/Products.PloneFormGen/Products/PloneFormGen/browser/resources'),
+  'plonetheme.barceloneta': PATH('lib/plonetheme.barceloneta/plonetheme/barceloneta/theme'),
 
   /* Bower */
   'bower/bootstrap': 'bootstrap',
@@ -116,10 +124,9 @@ const alias = {
   'picker.time': 'pickadate/lib/picker.time',
   'plone': CMFPLONE('static'),
   'plone-logged-in': CMFPLONE('static/plone-logged-in'),
-  'plone-patterns-portletmanager': PORTLETS('browser/manage-portlets'),
+  'plone-patterns-portletmanager': PATH('lib/plone.app.portlets/plone/app/portlets/browser/manage-portlets'),
   'plone-patterns-toolbar': CMFPLONE('static/patterns/toolbar/src/toolbar'),
-  'plone-patterns-toolbar.less': SRC('toolbar.less'),
-  'plonetheme.barceloneta': BARCELONETA('theme'),
+  'plone-patterns-toolbar.less': PATH('src/toolbar.less'),
   'plone-toolbar': CMFPLONE('static/patterns/toolbar/src'),
   'translate': MOCKUP('js/i18n-wrapper'),
 
@@ -176,14 +183,18 @@ const alias = {
   'pat-mockup-parser': PATTERNSLIB('src/core/mockup-parser'),
   'pat-registry': PATTERNSLIB('src/core/registry'),
   'pat-utils': PATTERNSLIB('src/core/utils'),
-  'logging': LOGGING('src/logging')
+  'logging': LOGGING('src/logging'),
+
+  // JQueryTools
+  'jquerytools.tabs': JQUERY_TOOLS('tabs/tabs')
 };
 
 const common = {
   entry: {
     'plone': path.join(PATHS.src, 'plone.js'),
     'plone-logged-in': path.join(PATHS.src, 'plone-logged-in.js'),
-    'resourceregistry': path.join(PATHS.src, 'resourceregistry.js')
+    'resourceregistry': path.join(PATHS.src, 'resourceregistry.js'),
+    'ploneformgen': path.join(PATHS.src, 'ploneformgen.js')
   },
   resolve: {
     alias: alias
@@ -193,10 +204,14 @@ const common = {
   },
   module: {
     loaders: [
-      { test: /backbone.paginator/, loader: 'imports?_=underscore' },
+      { test: /\.(png|gif|otf|eot|svg|ttf|woff|woff2).*$/, loader: 'url?limit=8192' },
       { test: alias['tinymce'], loader: 'exports?tinymce' },
       { test: alias['jquery.recurrenceinput'], loader: 'imports?tmpl=jquery.tmpl' },
-      { test: /\.(png|gif|otf|eot|svg|ttf|woff|woff2).*$/, loader: 'url?limit=8192' }
+      { test: alias['jquery.event.drop'], loader: 'exports?$.drop' },
+      { test: alias['jquerytools.tabs'], loader: 'exports?$.tabs' },
+      { test: /backbone.paginator/, loader: 'imports?_=underscore' },
+      { test: /PloneFormGen.*quickedit\.js$/,
+        loader: 'imports?requirejs=>define,_tabs=jquerytools.tabs' }
     ]
   },
   plugins: [
@@ -253,7 +268,8 @@ if(TARGET === 'watch') {
         { test: /\.less$/, loaders: ['style', 'css', 'less'] }
       ]
     },
-    entry: path.join(PATHS.src, 'plone-logged-in.js'),
+    entry: path.join(PATHS.src,
+                     process.env.ENTRYPOINT || 'plone-logged-in.js'),
     output: {
       filename: 'bundle.js',
       publicPath: 'http://' + (process.env.HOST || 'localhost') + ':' +
