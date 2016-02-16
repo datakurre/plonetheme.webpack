@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+  xmlns="http://namespaces.plone.org/diazo"
+  xmlns:css="http://namespaces.plone.org/diazo/css"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <!-- Drop default stylesheets and scripts -->
+  <drop content="//link[@rel='stylesheet']|//script" />
+
+  <!-- Drop anonymous bundle for logged-in-users -->
+  <drop css:if-content=".userrole-authenticated"
+        theme="//*[@data-name='bundle-plone']" />
+
+  <!-- Drop logged-in bundles for anonymous users -->
+  <drop css:if-content="body.userrole-anonymous"
+        theme="//*[@data-name='bundle-plone-logged-in']" />
+
+  <!-- Drop template specific bundles -->
+  <drop css:if-not-content="body.template-resourceregistry-controlpanel"
+        theme="//*[@data-name='bundle-resourceregistry']" />
+  <drop css:if-not-content="body.template-quickedit"
+        theme="//*[@data-name='bundle-ploneformgen']" />
+
+</rules>

@@ -25,3 +25,9 @@
 [submodule "lib/jquery-tmpl"]
 	path = lib/jquery-tmpl
 	url = https://github.com/BorisMoore/jquery-tmpl
+[submodule "lib/Products.PloneFormGen"]
+	path = lib/Products.PloneFormGen
+	url = https://github.com/smcmahon/Products.PloneFormGen
+[submodule "lib/jquerytools"]
+	path = lib/jquerytools
+	url = https://github.com/jquerytools/jquerytools
