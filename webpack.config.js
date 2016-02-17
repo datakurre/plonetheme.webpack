@@ -35,11 +35,14 @@ const LOGGING = resolver('./lib/logging');
 const MOCKUP = resolver('./lib/mockup/mockup');
 const PATTERNSLIB = resolver('./lib/patternslib');
 const TINYMCE = resolver('./lib/tinymce-builded');
+const MOSAIC = resolver('./lib/plone.app.mosaic/src/plone/app/mosaic');
 
 const alias = {
   // Add-ons
   'PloneFormGen': resolve('./lib/Products.PloneFormGen/Products/PloneFormGen/browser/resources'),
   'plonetheme.barceloneta': resolve('./lib/plonetheme.barceloneta/plonetheme/barceloneta/theme'),
+  'plone.app.mosaic': MOSAIC(),
+  'mosaic-url': MOSAIC('browser/static/js'),
 
   // Legacy bower aliases
   'bower/bootstrap': 'bootstrap',
@@ -74,6 +77,7 @@ const alias = {
   'mockup-patterns-cookietrigger': MOCKUP('patterns/cookietrigger/pattern'),
   'mockup-patterns-eventedit': MOCKUP('patterns/eventedit/pattern'),
   'mockup-patterns-filemanager': MOCKUP('patterns/filemanager/pattern'),
+  'mockup-patterns-filemanager.less': MOCKUP('patterns/filemanager/pattern.filemanager.less'),
   'mockup-patterns-filemanager-url': MOCKUP('patterns/filemanager'),
   'mockup-patterns-formautofocus': MOCKUP('patterns/formautofocus/pattern'),
   'mockup-patterns-formunloadalert': MOCKUP('patterns/formunloadalert/pattern'),
@@ -194,10 +198,12 @@ const alias = {
 
 const common = {
   entry: {
-    'plone': SRC('plone.js'),
-    'plone-logged-in': SRC('plone-logged-in.js'),
-    'resourceregistry': SRC('resourceregistry.js'),
-    'ploneformgen': SRC('ploneformgen.js')
+    'plone': SRC('plone'),
+    'plone-logged-in': SRC('plone-logged-in'),
+    'resourceregistry': SRC('resourceregistry'),
+    'ploneformgen': SRC('ploneformgen'),
+    'plone-mosaic': SRC('plone-mosaic'),
+    'plone-mosaic-layouts-editor': SRC('plone-mosaic-layouts-editor')
   },
   resolve: {
     alias: alias
@@ -218,8 +224,8 @@ const common = {
     ]
   },
   plugins: [
+    // Fix issues where css-loader left url()s with relative paths
     new webpack.NormalModuleReplacementPlugin(
-      // Fix issues where css-loader left url()s with relative paths
       new RegExp('^\./[^\.]+\.(png|gif)$'), function(ob) {
         switch(ob.request) {
           case './prev.gif':
@@ -233,9 +239,18 @@ const common = {
             break;
         }
     }),
+    // Fix plone.app.mosaic icon paths
+    new webpack.NormalModuleReplacementPlugin(
+      new RegExp('plone.app.mosaic.images'), function(ob) {
+        ob.request = path.join(MOSAIC('browser/static/img'),
+                               path.basename(ob.request));
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.join(PATHS.theme, 'index.html'),
+      chunksSortMode: function(a, b) {
+        return a.names[0] > b.names[0] ? 1 : -1;
+      },
       inject: false
     }),
     new webpack.ProvidePlugin({
