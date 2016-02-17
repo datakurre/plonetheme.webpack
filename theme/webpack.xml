@@ -20,4 +20,10 @@
   <drop css:if-not-content="body.template-quickedit"
         theme="//*[@data-name='bundle-ploneformgen']" />
 
+  <!-- Drop Plone Mosaic bundles -->
+  <drop css:if-not-content="textarea.pat-layout"
+        theme="//*[@data-name='bundle-plone-mosaic']" />
+  <drop css:if-not-content="body.template-layouts-editor"
+        theme="//*[@data-name='bundle-plone-mosaic-layouts-editor']" />
+
 </rules>

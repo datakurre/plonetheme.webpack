@@ -31,3 +31,6 @@
 [submodule "lib/jquerytools"]
 	path = lib/jquerytools
 	url = https://github.com/jquerytools/jquerytools
+[submodule "lib/plone.app.mosaic"]
+	path = lib/plone.app.mosaic
+	url = https://github.com/plone/plone.app.mosaic

@@ -78,3 +78,10 @@ Known issues
   loaded resources. This defaults to ``/Plone/++theme++webpack/`` but
   can be customized with an enviroment variable as in
   ``PUBLIC_PATH=/site/++theme++mytheme/ make build``.
+
+* LESS compiler chokes (running out of memory because of endless
+  recursion) in cases, where bootstrap's variables are included by
+  two different LESS imports in a single LESS requirements. Fixing
+  this has required splitting LESS imports behind separate requires
+  (e.g. plone.app.mosaic requires separate LESS requires for the
+  pattern and layout control panel).
