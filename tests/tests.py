@@ -18,7 +18,7 @@ class ThemeLayer(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
         path = os.path.normpath(os.path.join(
-            os.path.dirname(__file__), os.path.pardir, 'build'))
+            os.path.dirname(__file__), os.path.pardir, 'resources'))
         xmlconfig.string("""\
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:plone="http://namespaces.plone.org/plone">
@@ -30,9 +30,6 @@ class ThemeLayer(PloneSandboxLayer):
         api.portal.set_registry_record(
             'plone.app.theming.interfaces.IThemeSettings.currentTheme',
             u'webpack')
-        api.portal.set_registry_record(
-            'plone.app.theming.interfaces.IThemeSettings.rules',
-            u'/++theme++webpack/rules.xml')
         api.portal.set_registry_record(
             'plone.app.theming.interfaces.IThemeSettings.rules',
             u'/++theme++webpack/rules.xml')

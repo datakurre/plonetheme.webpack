@@ -15,7 +15,7 @@ in with dependencies; rec {
     extraLibs = [ buildout ];
     ignoreCollisions = true;
   };
-  shell = stdenv.mkDerivation rec {
+  env = stdenv.mkDerivation rec {
     name = "buildout";
     env = buildEnv { name = name; paths = buildInputs; };
     builder = builtins.toFile "builder.sh" ''

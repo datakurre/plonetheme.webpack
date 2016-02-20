@@ -3,8 +3,9 @@
 .installed.cfg
 *.pyc
 bootstrap-buildout.py
-build/
+resources/
 node_modules/
 bin/
 parts/
+develop-eggs/
 var/

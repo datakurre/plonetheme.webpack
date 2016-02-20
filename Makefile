@@ -11,29 +11,25 @@ show:
 	@echo $(SOURCES)
 
 build: clean lib $(WEBPACK) $(SOURCES)
-	mkdir -p build/theme
-	cp -R theme build/theme/webpack
 	$(WEBPACK)
 
 watch: clean lib $(WEBPACK) $(SOURCES)
-	mkdir -p build/theme
-	cp -R theme build/theme/webpack
-	PORT=8090 TARGET=watch $(WEBPACK)
 	PORT=8090 TARGET=watch $(WEBPACK_DEV_SERVER)
 
 clean:
-	rm -rf build
+	rm -rf resources
 
 ###
 
-.PHONY: all show build lcean
+.PHONY: all show build watch clean
 
 node_modules: package.json
 	npm install
 	touch node_modules
 
-lib: node_modules
-	git submodule update --init --recursive
+lib: .gitmodules
+	git submodule update --init --depth=1 --recursive
+	git submodule update --remote --depth=1 --
 	touch lib
 
 bootstrap-buildout.py:
