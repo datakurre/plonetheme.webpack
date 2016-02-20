@@ -28,8 +28,8 @@ node_modules: package.json
 	touch node_modules
 
 lib: .gitmodules
-	git submodule update --init --depth 1 --recursive
-	git submodule update --remote --depth 1 --
+	git submodule update --init --depth=1 --recursive
+	git submodule update --remote --depth=1 --
 	touch lib
 
 bootstrap-buildout.py:

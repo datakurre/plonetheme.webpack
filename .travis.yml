@@ -12,4 +12,7 @@ install:
 - npm i
 script:
 - PUBLIC_PATH=/plone/++theme++webpack/ make build bin/test
-- bin/test --test-path=src -t test_portlets -t test_tinymce
+- bin/test --test-path=tests -t test_livesearch -t test_portlets -t test_tinymce
+env:
+  global:
+    - ROBOT_SELENIUM_IMPLICIT_WAIT=1
