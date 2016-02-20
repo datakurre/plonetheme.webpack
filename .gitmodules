@@ -1,36 +1,48 @@
 [submodule "lib/Products.CMFPlone"]
 	path = lib/Products.CMFPlone
 	url = https://github.com/plone/Products.CMFPlone
+	branch = master
 [submodule "lib/plone.app.portlets"]
 	path = lib/plone.app.portlets
 	url = https://github.com/plone/plone.app.portlets
+	branch = master
 [submodule "lib/mockup"]
 	path = lib/mockup
 	url = https://github.com/plone/mockup
+	branch = master
 [submodule "lib/patternslib"]
 	path = lib/patternslib
 	url = https://github.com/Patternslib/Patterns
+	branch = master
 [submodule "lib/logging"]
 	path = lib/logging
 	url = https://github.com/Patternslib/logging
+	branch = master
 [submodule "lib/tinymce-builded"]
 	path = lib/tinymce-builded
 	url = https://github.com/artursmirnov/tinymce_builded
+	branch = master
 [submodule "lib/jquery.recurrenceinput"]
 	path = lib/jquery.recurrenceinput
 	url = https://github.com/collective/jquery.recurrenceinput.js
+	branch = master
 [submodule "lib/plonetheme.barceloneta"]
 	path = lib/plonetheme.barceloneta
 	url = https://github.com/plone/plonetheme.barceloneta
+	branch = master
 [submodule "lib/jquery-tmpl"]
 	path = lib/jquery-tmpl
 	url = https://github.com/BorisMoore/jquery-tmpl
+	branch = master
 [submodule "lib/Products.PloneFormGen"]
 	path = lib/Products.PloneFormGen
 	url = https://github.com/smcmahon/Products.PloneFormGen
+	branch = master
 [submodule "lib/jquerytools"]
 	path = lib/jquerytools
 	url = https://github.com/jquerytools/jquerytools
+	branch = master
 [submodule "lib/plone.app.mosaic"]
 	path = lib/plone.app.mosaic
 	url = https://github.com/plone/plone.app.mosaic
+	branch = master
