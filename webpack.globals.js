@@ -31,6 +31,7 @@ const alias = {
   // Add-ons
   'PloneFormGen': resolve('./lib/Products.PloneFormGen/Products/PloneFormGen/browser/resources'),
   'plonetheme.barceloneta': resolve('./lib/plonetheme.barceloneta/plonetheme/barceloneta/theme'),
+  'plonetheme.webpack': SRC(),
   'plone.app.mosaic': MOSAIC(),
   'mosaic-url': MOSAIC('browser/static/js'),
 
