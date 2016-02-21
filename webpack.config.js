@@ -16,10 +16,10 @@ const PATHS = {
 const common = merge(require('./webpack.globals'), {
   // Define bundles
   entry: {
-    'plone': join(PATHS.src, 'plone'),
-    'plone-logged-in': join(PATHS.src, 'plone-logged-in'),
-    'resourceregistry': join(PATHS.src, 'resourceregistry'),
-    'ploneformgen': join(PATHS.src, 'ploneformgen'),
+    'anonymous': join(PATHS.src, 'anonymous'),
+    'authenticated': join(PATHS.src, 'authenticated'),
+    'resourceregistry': join(PATHS.src, 'plone-resourceregistry'),
+    'ploneformgen': join(PATHS.src, 'products-ploneformgen'),
     'plone-mosaic': join(PATHS.src, 'plone-mosaic'),
     'plone-mosaic-layouts-editor': join(PATHS.src, 'plone-mosaic-layouts-editor')
   },
@@ -67,7 +67,7 @@ if(TARGET === 'build' || !TARGET) {
     },
     plugins: [
       new ExtractTextPlugin('[name].[chunkhash].css'),
-      new webpack.optimize.CommonsChunkPlugin('init.js'),
+      new webpack.optimize.CommonsChunkPlugin('__init__.js'),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
       })
@@ -84,8 +84,8 @@ if(TARGET === 'watch') {
       progress: true,
       stats: 'errors-only',
       outputPath: PATHS.build,
-      host: process.env.HOST || 'localhost',
-      port: process.env.PORT || '8080'
+      host: 'localhost',
+      port: '8090'
     },
     module: {
       loaders: [
@@ -93,12 +93,10 @@ if(TARGET === 'watch') {
           loaders: ['style', 'css', 'less'] }
       ]
     },
-    entry: join(PATHS.src,
-                process.env.ENTRYPOINT || 'plone-logged-in.js'),
+    entry: join(PATHS.src, 'authenticated.js'),
     output: {
       filename: 'bundle.js',
-      publicPath: 'http://' + (process.env.HOST || 'localhost') + ':' +
-                  (process.env.PORT || '8080') + '/assets/'
+      publicPath: 'http://localhost:8090/assets/'
     },
     plugins: [
       new WriteFileWebpackPlugin(),

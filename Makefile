@@ -14,7 +14,7 @@ build: clean lib $(WEBPACK) $(SOURCES)
 	$(WEBPACK)
 
 watch: clean lib $(WEBPACK) $(SOURCES)
-	PORT=8090 TARGET=watch $(WEBPACK_DEV_SERVER)
+	TARGET=watch $(WEBPACK_DEV_SERVER)
 
 clean:
 	rm -rf resources

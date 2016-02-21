@@ -1,4 +1,2 @@
-require('./plone.less');
-require('./theme.less');
-
+require('plonetheme.webpack/plone.less');
 require('plone/plone');

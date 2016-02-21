@@ -16,28 +16,31 @@ function resolver(base) {
   };
 }
 
-const SRC = resolver('./src/theme/webpack');
-const CMFPLONE = resolver('./lib/Products.CMFPlone/Products/CMFPlone');
 const JQUERY_RECURRENCE = resolver('./lib/jquery.recurrenceinput');
 const JQUERY_TMPL = resolver('./lib/jquery-tmpl');
 const JQUERY_TOOLS = resolver('./lib/jquerytools/src');
+
 const LOGGING = resolver('./lib/logging');
-const MOCKUP = resolver('./lib/mockup/mockup');
-const PATTERNSLIB = resolver('./lib/patternslib');
 const TINYMCE = resolver('./lib/tinymce-builded');
+const PATTERNSLIB = resolver('./lib/patternslib');
+const MOCKUP = resolver('./lib/mockup/mockup');
+
+const CMFPLONE = resolver('./lib/Products.CMFPlone/Products/CMFPlone');
 const MOSAIC = resolver('./lib/plone.app.mosaic/src/plone/app/mosaic');
+
+const WEBPACK = resolver('./src/theme/webpack');
 
 const alias = {
   // Add-ons
   'PloneFormGen': resolve('./lib/Products.PloneFormGen/Products/PloneFormGen/browser/resources'),
   'plonetheme.barceloneta': resolve('./lib/plonetheme.barceloneta/plonetheme/barceloneta/theme'),
-  'plonetheme.webpack': SRC(),
+  'plonetheme.webpack': WEBPACK(),
   'plone.app.mosaic': MOSAIC(),
   'mosaic-url': MOSAIC('browser/static/js'),
 
   // Legacy bower aliases
-  'bower/bootstrap': 'bootstrap',
   'bowerbootstrap': 'bootstrap',
+  'bower/bootstrap': 'bootstrap',
   'bower/dropzone': 'dropzone',
   'bower/jqtree': 'jqtree',
   'bower/jquery.recurrenceinput.js': JQUERY_RECURRENCE(),
@@ -124,7 +127,7 @@ const alias = {
   'plone-logged-in': CMFPLONE('static/plone-logged-in'),
   'plone-patterns-portletmanager': resolve('./lib/plone.app.portlets/plone/app/portlets/browser/manage-portlets'),
   'plone-patterns-toolbar': CMFPLONE('static/patterns/toolbar/src/toolbar'),
-  'plone-patterns-toolbar.less': SRC('toolbar.less'),
+  'plone-patterns-toolbar.less': WEBPACK('plone-patterns-toolbar.less'),
   'plone-toolbar': CMFPLONE('static/patterns/toolbar/src'),
   'translate': MOCKUP('js/i18n-wrapper'),
 

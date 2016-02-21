@@ -1,5 +1,2 @@
-require('./plone-logged-in.less');
-require('./theme.less');
-
-require('plone/plone');
-require('plone-logged-in');
+require('plonetheme.webpack/plone-logged-in.less');
+require('plone/plone-logged-in');

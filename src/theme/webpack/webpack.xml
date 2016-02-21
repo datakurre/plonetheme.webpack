@@ -8,11 +8,11 @@
 
   <!-- Drop anonymous bundle for logged-in-users -->
   <drop css:if-content=".userrole-authenticated"
-        theme="//*[@data-name='bundle-plone']" />
+        theme="//*[@data-name='bundle-anonymous']" />
 
   <!-- Drop logged-in bundles for anonymous users -->
   <drop css:if-content="body.userrole-anonymous"
-        theme="//*[@data-name='bundle-plone-logged-in']" />
+        theme="//*[@data-name='bundle-authenticated']" />
 
   <!-- Drop template specific bundles -->
   <drop css:if-not-content="body.template-resourceregistry-controlpanel"
