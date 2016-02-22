@@ -28,8 +28,7 @@ const common = merge(require('./webpack.globals'), {
   },
   module: {
     loaders: [
-      { test: /jquery\.js$/, loader: 'expose?$' },
-      { test: /jquery\.js$/, loader: 'expose?jQuery' }
+      { test: require.resolve('jquery'), loader: 'expose?$!expose?jQuery' }
     ]
   },
   plugins: [
