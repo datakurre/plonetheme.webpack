@@ -6,6 +6,10 @@
   <!-- Drop default stylesheets and scripts -->
   <drop content="//link[@rel='stylesheet']|//script" />
 
+  <!-- Move scripts within body after bundle -->
+  <after theme-children="/html/body" method="raw"
+         content="/html/body//script" />
+
   <!-- Drop anonymous bundle for logged-in-users -->
   <drop css:if-content=".userrole-authenticated"
         theme="//*[@data-name='bundle-anonymous']" />
