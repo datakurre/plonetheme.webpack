@@ -1,31 +1,29 @@
-with import <nixpkgs> {}; with python27Packages;
-let dependencies = rec {
-  buildout = zc_buildout_nix.overrideDerivation (args: {
-    postInstall = "";  # don't rename 'buildout' to 'buildout-nix'
-    propagatedNativeBuildInputs = [
+{ pkgs ? import (builtins.fetchTarball  # revision for reproducible builds
+  "https://github.com/nixos/nixpkgs-channels/archive/d9f5e94bae088234791ae28f0d813a9fad5b8163.tar.gz") {}
+, pythonPackages ? pkgs.python27Packages
+}:
+
+let self = {
+  buildout = pythonPackages.zc_buildout_nix.overrideDerivation (old: {
+    propagatedNativeBuildInputs = with pythonPackages; [
       ldap
       lxml
-      python_magic
       pillow
     ];
   });
 };
-in with dependencies; rec {
-  python = pythonFull.buildEnv.override {
-    extraLibs = [ buildout ];
-    ignoreCollisions = true;
-  };
-  env = stdenv.mkDerivation rec {
-    name = "buildout";
-    env = buildEnv { name = name; paths = buildInputs; };
-    builder = builtins.toFile "builder.sh" ''
-      source $stdenv/setup; ln -s $env $out
-    '';
-    buildInputs = [ buildout ];
-    shellHook = ''
-      export BUILDOUT_ARGS="versions:setuptools= versions:zc.buildout= \
-      versions:Pillow= versions:lxml= versions:python-ldap= \
-      config:plone-hotfixes= config:chameleon-cache=/tmp"
-    '';
-  };
+
+in pkgs.stdenv.mkDerivation rec {
+  name = "env";
+  buildInputs = with self; [ buildout ];
+  shellHook = ''
+    function buildout {
+      buildout-nix $@ \
+        versions:lxml= \
+        versions:Pillow= \
+        versions:python-ldap= \
+        versions:setuptools= \
+        versions:zc.buildout=
+    }
+  '';
 }
