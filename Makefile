@@ -4,32 +4,33 @@ WEBPACK := node_modules/.bin/webpack
 WEBPACK_DEV_SERVER := node_modules/.bin/webpack-dev-server
 
 SOURCES = $(wildcard src/*) $(wildcard theme/*) webpack.config.js
+LIB = lib/plonetheme.barceloneta/.git
 
 all: build
 
 show:
 	@echo $(SOURCES)
 
-build: clean lib $(WEBPACK) $(SOURCES)
+build: clean $(LIB) $(WEBPACK) $(SOURCES)
 	$(WEBPACK)
 
-watch: clean lib $(WEBPACK) $(SOURCES)
+watch: clean $(LIB) $(WEBPACK) $(SOURCES)
 	TARGET=watch $(WEBPACK_DEV_SERVER)
 
 clean:
 	rm -rf resources
 
+lib:
+	git submodule update --init --depth=100 --recursive
+	git submodule update --remote --depth=100 --
+
 ###
 
-.PHONY: all show build watch clean
+.PHONY: all show build watch clean lib
 
 node_modules: package.json
 	npm install
 	touch node_modules
-
-lib: .gitmodules
-	git submodule update --init --depth=1 --recursive
-	touch lib
 
 bootstrap-buildout.py:
 	curl -k -O https://bootstrap.pypa.io/bootstrap-buildout.py
@@ -42,6 +43,10 @@ bin/instance: $(BUILDOUT_BIN) buildout.cfg
 
 bin/test: $(BUILDOUT_BIN) buildout.cfg
 	$(BUILDOUT_BIN) -N install test
+
+$(LIB):
+	git submodule update --init --depth=100 --recursive
+	git submodule update --remote --depth=100 --
 
 $(WEBPACK): node_modules
 $(WEBPACK_DEV_SERVER): node_modules
