@@ -1,2 +1,2 @@
-require('PloneFormGen/quickedit.less');
+require('./products-ploneformgen.less');
 require('PloneFormGen/quickedit');

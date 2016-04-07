@@ -27,6 +27,7 @@ const common = merge(require('./webpack.globals'), {
     path: PATHS.build
   },
   module: {
+    exprContextCritical: false,  // structure pattern has dynamic requires
     loaders: [
       { test: require.resolve('jquery'), loader: 'expose?$!expose?jQuery' }
     ]
@@ -88,7 +89,6 @@ if(TARGET === 'watch') {
       port: '8090'
     },
     module: {
-      exprContextCritical: false,  // structure pattern has dynamic requires
       loaders: [
         { test: /\.less$/,
           loaders: ['style', 'css', 'less'] }
