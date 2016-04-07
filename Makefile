@@ -21,8 +21,8 @@ clean:
 	rm -rf resources
 
 lib:
-	git submodule update --init --depth=100 --recursive
-	git submodule update --remote --depth=100 --
+	git submodule update --init --recursive
+	git submodule update --remote --
 
 ###
 
@@ -45,8 +45,8 @@ bin/test: $(BUILDOUT_BIN) buildout.cfg
 	$(BUILDOUT_BIN) -N install test
 
 $(LIB):
-	git submodule update --init --depth=100 --recursive
-	git submodule update --remote --depth=100 --
+	git submodule update --init --recursive
+	git submodule update --remote --
 
 $(WEBPACK): node_modules
 $(WEBPACK_DEV_SERVER): node_modules
