@@ -21,6 +21,7 @@
 [submodule "lib/tinymce-builded"]
 	path = lib/tinymce-builded
 	url = https://github.com/artursmirnov/tinymce_builded
+	branch = master
 [submodule "lib/jquery.recurrenceinput"]
 	path = lib/jquery.recurrenceinput
 	url = https://github.com/collective/jquery.recurrenceinput.js
