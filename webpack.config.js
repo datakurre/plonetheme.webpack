@@ -66,7 +66,8 @@ if(TARGET === 'build' || !TARGET) {
     },
     plugins: [
       new ExtractTextPlugin('[name].[chunkhash].css'),
-      new webpack.optimize.CommonsChunkPlugin('__init__.js'),
+      new webpack.optimize.CommonsChunkPlugin(
+        '__init__.' + (new Date()).getTime() + '.js'),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
       })
@@ -93,7 +94,7 @@ if(TARGET === 'watch') {
           loaders: ['style', 'css', 'less'] }
       ]
     },
-    entry: join(PATHS.src, 'authenticated.js'),
+    entry: join(PATHS.src, 'authenticated.js'),
     output: {
       filename: 'bundle.js',
       publicPath: 'http://localhost:8090/assets/'

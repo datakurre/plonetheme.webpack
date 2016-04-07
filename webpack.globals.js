@@ -233,7 +233,7 @@ module.exports = {
   module: {
     loaders: [
 
-      { test: /\.(png|gif|otf|eot|svg|ttf|woff|woff2)$/,
+      { test: /\.(png|gif|otf|eot|svg|ttf|woff|woff2)(\?.*)?$/,
         loader: 'url?limit=8192' },
 
       { test: alias['tinymce'],
