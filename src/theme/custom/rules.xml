@@ -3,10 +3,14 @@
   xmlns="http://namespaces.plone.org/diazo"
   xmlns:css="http://namespaces.plone.org/diazo/css">
 
-  <!-- Inject custom.css and custom.js -->
+  <!-- Inject custom.css -->
   <!--
   <after theme-children="/html/head" method="raw"
          content="/html/head/link[@data-bundle='diazo']" />
+  -->
+
+  <!-- Inject custom.js-->
+  <!--
   <after theme-children="/html/body" method="raw"
          content="/html/head/script[@data-bundle='diazo']" />
   -->

@@ -132,7 +132,6 @@ const alias = {
   'translate': MOCKUP('js/i18n-wrapper'),
 
   // TinyMCE aliases
-  'tinymce': TINYMCE('js/tinymce/tinymce'),
   'tinymce-advlist': TINYMCE('js/tinymce/plugins/advlist/plugin'),
   'tinymce-anchor': TINYMCE('js/tinymce/plugins/anchor/plugin'),
   'tinymce-autolink': TINYMCE('js/tinymce/plugins/autolink/plugin'),
@@ -175,6 +174,7 @@ const alias = {
   'tinymce-visualblocks': TINYMCE('js/tinymce/plugins/visualblocks/plugin'),
   'tinymce-visualchars': TINYMCE('js/tinymce/plugins/visualchars/plugin'),
   'tinymce-wordcount': TINYMCE('js/tinymce/plugins/wordcount/plugin'),
+  'tinymce': TINYMCE('js/tinymce/tinymce'),
 
   // Patternslib aliases
   'pat-base': PATTERNSLIB('src/core/base'),
@@ -190,6 +190,40 @@ const alias = {
   'jquerytools.tabs': JQUERY_TOOLS('tabs/tabs')
 };
 
+function AddToContextPlugin(condition, extras) {
+  this.condition = condition;
+  this.extras = extras || [];
+}
+
+// http://stackoverflow.com/questions/30065018/
+// dynamically-require-an-aliased-module-using-webpack
+AddToContextPlugin.prototype.apply = function (compiler) {
+  const condition = this.condition;
+  const extras = this.extras;
+  var newContext = false;
+  compiler.plugin('context-module-factory', function (cmf) {
+    cmf.plugin('after-resolve', function (items, callback) {
+      newContext = true;
+      return callback(null, items);
+    });
+    // this method is called for every path in the ctx
+    // we just add our extras the first call
+    cmf.plugin('alternatives', function (items, callback) {
+      if (newContext && items[0].context.match(condition)) {
+        newContext = false;
+        var alternatives = extras.map(function (extra) {
+          return {
+            context: items[0].context,
+            request: extra
+          };
+        });
+        items.push.apply(items, alternatives);
+      }
+      return callback(null, items);
+    });
+  });
+};
+
 module.exports = {
   resolve: {
 
@@ -203,7 +237,10 @@ module.exports = {
         loader: 'url?limit=8192' },
 
       { test: alias['tinymce'],
-        loader: 'exports?tinymce' },
+        loader: 'imports?document=>window.document,this=>window!exports?window.tinymce' },
+
+      { test: /tinymce\/plugins/,
+        loader: 'imports?tinymce,this=>{tinymce:tinymce}' },
 
       { test: alias['jquery.recurrenceinput'],
         loader: 'imports?tmpl=jquery.tmpl' },
@@ -254,6 +291,21 @@ module.exports = {
         ob.request = path.join(MOSAIC('browser/static/img'),
           path.basename(ob.request));
       }
+    ),
+
+    // Fix dynamic requires in structure pattern
+    // https://github.com/plone/mockup/commit/89de866dff89a455bd4102c84a3fa8f9a0bcc34b
+    new webpack.ContextReplacementPlugin(
+      new RegExp('patterns\/structure'),
+      new RegExp('^\.\/.*$|^mockup-patterns-structure-url/.*$')
+    ),
+    new AddToContextPlugin(
+      new RegExp('patterns\/structure'), [
+        'mockup-patterns-structure-url/js/actions.js',
+        'mockup-patterns-structure-url/js/actionmenu.js',
+        'mockup-patterns-structure-url/js/navigation.js',
+        'mockup-patterns-structure-url/js/collections/result.js'
+      ]
     )
   ]
 };
