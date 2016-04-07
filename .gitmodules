@@ -1,7 +1,7 @@
 [submodule "lib/Products.CMFPlone"]
 	path = lib/Products.CMFPlone
 	url = https://github.com/plone/Products.CMFPlone
-	branch = master
+	branch = 5.0.x
 [submodule "lib/plone.app.portlets"]
 	path = lib/plone.app.portlets
 	url = https://github.com/plone/plone.app.portlets
