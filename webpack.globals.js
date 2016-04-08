@@ -255,7 +255,10 @@ module.exports = {
         loader: 'imports?_=underscore' },
 
       { test: /PloneFormGen.*quickedit\.js$/,
-        loader: 'imports?requirejs=>define,_tabs=jquerytools.tabs' }
+        loader: 'imports?requirejs=>define,_tabs=jquerytools.tabs' },
+
+      { test: alias['mockup-patterns-texteditor'],
+        loader: 'imports?ace=ace,_=ace/mode/javascript,_=ace/mode/text,_=ace/mode/css,_=ace/mode/html,_=ace/mode/xml,_=ace/mode/less,_=ace/mode/python,_=ace/mode/xml,_=ace/mode/ini' }
 
     ]
   },
