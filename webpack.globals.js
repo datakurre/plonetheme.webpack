@@ -258,7 +258,7 @@ module.exports = {
         loader: 'imports?requirejs=>define,_tabs=jquerytools.tabs' },
 
       { test: alias['mockup-patterns-texteditor'],
-        loader: 'imports?ace=ace,_=ace/mode/javascript,_=ace/mode/text,_=ace/mode/css,_=ace/mode/html,_=ace/mode/xml,_=ace/mode/less,_=ace/mode/python,_=ace/mode/xml,_=ace/mode/ini' }
+        loader: 'imports?ace=ace,_a=ace/mode/javascript,_b=ace/mode/text,_c=ace/mode/css,_d=ace/mode/html,_e=ace/mode/xml,_f=ace/mode/less,_g=ace/mode/python,_h=ace/mode/xml,_i=ace/mode/ini' }
 
     ]
   },
