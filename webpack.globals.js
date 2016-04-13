@@ -177,6 +177,7 @@ const alias = {
   'tinymce': TINYMCE('js/tinymce/tinymce'),
 
   // Patternslib aliases
+  'patternslib': PATTERNSLIB('src/'),
   'pat-base': PATTERNSLIB('src/core/base'),
   'pat-compat': PATTERNSLIB('/src/core/compat'),
   'pat-jquery-ext': PATTERNSLIB('src/core/jquery-ext'),
