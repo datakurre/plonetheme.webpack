@@ -1,2 +1,11 @@
 @import '~plonetheme.webpack/globals.less';
 @import '~plone/plone.less';
+
+// XXX: Not sure why toolbar looked broken without this
+@media (min-width: @plone-screen-xs-max) {
+  .plone-toolbar-left #edit-zone {
+    .plone-toolbar-main {
+      padding-right: 3px;
+    }
+  }
+}
